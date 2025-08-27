@@ -18,6 +18,9 @@ const Header: React.FC = () => {
         <Link to="/" className="font-bold text-2xl cursor-pointer select-none hover:text-pink-400 transition-colors">
           📱 Mobile Store
         </Link>
+        <Link to="/productos" className="ml-4 text-lg hover:text-pink-400 transition-colors">
+          Productos
+        </Link>
          {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="ml-4">
           <ol className="flex items-center space-x-2 text-sm text-gray-300">
