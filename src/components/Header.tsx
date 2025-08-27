@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { unslugify } from '../utils/slugify';
+import { useApp } from '../hooks/useApp';
 
 const breadcrumbsMap: Record<string, string> = {
   '/': 'Inicio',
-  '/productos': 'Productos',
-  '/detalle': 'Detalle',
 };
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const { cartCount } = useApp();
   const path = location.pathname;
   const crumbs = path.split('/').filter(Boolean);
 
@@ -30,9 +30,6 @@ const Header: React.FC = () => {
         <Link to="/" className="font-bold text-2xl cursor-pointer select-none hover:text-pink-400 transition-colors">
           📱 Mobile Store
         </Link>
-        {/* <Link to="/productos" className="ml-4 text-lg hover:text-pink-400 transition-colors">
-          Productos
-        </Link> */}
          {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="ml-4">
           <ol className="flex items-center space-x-2 text-sm text-gray-300">
@@ -51,8 +48,9 @@ const Header: React.FC = () => {
         </nav>
       </div>
       <div>
-        {/* TODO crear funcionalidad al carrito */}
-        <span className="bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold">Carrito: 0</span>
+        <span className="bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold">
+          Carrito: {cartCount}
+        </span>
       </div>
     </header>
   );

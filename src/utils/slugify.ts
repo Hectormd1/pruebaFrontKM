@@ -1,5 +1,7 @@
+import type { SlugifyFunction } from '../types';
+
 // Función para convertir nombres de productos en slugs URL-friendly
-export const slugify = (text: string): string => {
+export const slugify: SlugifyFunction = (text: string): string => {
   return text
     .toLowerCase()
     .trim()
