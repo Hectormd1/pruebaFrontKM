@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build",
     "test": "jest",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview"
   },
   "dependencies": {
