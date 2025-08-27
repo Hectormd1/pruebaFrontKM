@@ -43,11 +43,12 @@ class ApiService {
 
     try {
       const response = await this.fetchWithRetries(`${API_BASE_URL}/api/product`);
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el listado de productos');
+      }
       const products: Product[] = await response.json();
-      
       // Guardar en cache
       cacheService.set(cacheKey, products);
-      
       return products;
     } catch (error) {
       console.error('Error al obtener productos:', error);
