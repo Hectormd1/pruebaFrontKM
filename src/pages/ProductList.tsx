@@ -5,7 +5,7 @@ import { useApp } from "../hooks/useApp";
 import type { Product } from "../types";
 
 const ProductList: React.FC = () => {
-  const { products, isLoading, error, loadProducts, addToCart } = useApp();
+  const { products, isLoading, error, loadProducts } = useApp();
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState<Product[]>([]);
 
@@ -22,22 +22,6 @@ const ProductList: React.FC = () => {
       )
     );
   }, [search, products]);
-
-  const handleAddToCart = async (product: Product) => {
-    try {
-      // Usar el primer color y almacenamiento disponible como valores por defecto
-      const colorCode = product.options?.colors?.[0]?.code || 1;
-      const storageCode = product.options?.storages?.[0]?.code || 1;
-      
-      await addToCart({
-        id: product.id,
-        colorCode,
-        storageCode
-      });
-    } catch (error) {
-      console.error("Error al añadir al carrito:", error);
-    }
-  };
 
   if (isLoading) {
     return (
@@ -97,12 +81,6 @@ const ProductList: React.FC = () => {
                 <div className="text-sm text-gray-500 mb-2">{product.brand}</div>
                 <div className="font-bold text-blue-600 mb-2">{product.price || "-"} €</div>
               </Link>
-              <button 
-                onClick={() => handleAddToCart(product)}
-                className="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-              >
-                Agregar al carrito
-              </button>
             </div>
           ))
         )}

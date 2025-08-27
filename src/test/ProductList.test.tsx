@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProvider } from '../context/AppContext';
 import ProductList from '../pages/ProductList';
@@ -9,8 +9,7 @@ jest.mock('../services/apiService', () => ({
   apiService: {
     getProducts: jest.fn(() => Promise.resolve([
       { id: '1', brand: 'Acer', model: 'Test', price: '100', imgUrl: '', options: { colors: [{ code: 1, name: 'Negro' }], storages: [{ code: 1, name: '64GB' }] } }
-    ])),
-    addToCart: jest.fn(() => Promise.resolve({ count: 1 }))
+    ]))
   }
 }));
 
@@ -42,20 +41,5 @@ describe('ProductList', () => {
       </BrowserRouter>
     );
     expect(await screen.findByText(/no se encontraron productos/i)).toBeInTheDocument();
-  });
-
-  it('llama a addToCart al hacer click', async () => {
-    render(
-      <BrowserRouter>
-        <AppProvider>
-          <ProductList />
-        </AppProvider>
-      </BrowserRouter>
-    );
-    const btn = await screen.findByText(/agregar al carrito/i);
-    fireEvent.click(btn);
-    await waitFor(() => {
-      expect(apiService.addToCart).toHaveBeenCalled();
-    });
   });
 });
