@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { unslugify } from '../utils/slugify';
-import { useApp } from '../hooks/useApp';
+import { Cart } from './Cart';
 
 const breadcrumbsMap: Record<string, string> = {
   '/': 'Inicio',
@@ -9,7 +9,6 @@ const breadcrumbsMap: Record<string, string> = {
 
 const Header: React.FC = () => {
   const location = useLocation();
-  const { cartCount } = useApp();
   const path = location.pathname;
   const crumbs = path.split('/').filter(Boolean);
 
@@ -48,9 +47,7 @@ const Header: React.FC = () => {
         </nav>
       </div>
       <div>
-        <span className="bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold">
-          Carrito: {cartCount}
-        </span>
+        <Cart />
       </div>
     </header>
   );

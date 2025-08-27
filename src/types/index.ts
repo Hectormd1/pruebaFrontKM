@@ -34,6 +34,9 @@ export interface CartItem {
   id: string;
   colorCode: number;
   storageCode: number;
+  colorName?: string; // Nombre del color
+  storageName?: string; // Nombre del almacenamiento
+  cartId?: string; // ID único para el carrito
 }
 
 export interface CartResponse {
@@ -59,10 +62,12 @@ export interface AppState {
 export interface AppContextType {
   products: Product[];
   cartCount: number;
+  cartItems: CartItem[];
   isLoading: boolean;
   error: string | null;
   loadProducts: () => Promise<void>;
   addToCart: (item: CartItem) => Promise<void>;
+  removeFromCart: (cartId: string) => void;
 }
 
 // Tipos para props de componentes

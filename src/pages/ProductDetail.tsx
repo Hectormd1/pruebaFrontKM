@@ -99,11 +99,22 @@ const ProductDetail: React.FC = () => {
 
     try {
       setAddingToCart(true);
-      await addToCart({
+      
+      // Encontrar los nombres del color y almacenamiento seleccionados
+      const selectedColor = product.options?.colors?.find(c => c.code.toString() === selectedColorCode);
+      const selectedStorage = product.options?.storages?.find(s => s.code.toString() === selectedStorageCode);
+      
+      const cartItem = {
         id: product.id,
         colorCode: parseInt(selectedColorCode),
-        storageCode: parseInt(selectedStorageCode)
-      });
+        storageCode: parseInt(selectedStorageCode),
+        colorName: selectedColor?.name,
+        storageName: selectedStorage?.name
+      };
+      
+      console.log('CartItem que se envía:', cartItem);
+      
+      await addToCart(cartItem);
     } catch (err) {
       console.error("Error al añadir al carrito:", err);
     } finally {
