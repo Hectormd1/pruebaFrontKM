@@ -31,6 +31,7 @@ class ApiService {
     // Si llegamos aquí, todos los intentos fallaron
     throw new Error(`Falló después de ${MAX_RETRIES + 1} intentos: ${lastError.message}`);
   }
+  
   // Obtener listado de productos
   async getProducts(): Promise<Product[]> {
     const cacheKey = 'products';

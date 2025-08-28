@@ -25,8 +25,8 @@ const ProductDetail: React.FC = () => {
         
         // Primero obtenemos todos los productos para encontrar el ID por el slug
         const products = await apiService.getProducts();
-        const foundProduct = products.find((p) => slugify(p.brand + " " + p.model) === productName);
-        
+        const foundProduct = products.find((product) => slugify(product.brand + " " + product.model) === productName);
+
         if (!foundProduct) {
           setError("Producto no encontrado");
           return;
@@ -65,7 +65,7 @@ const ProductDetail: React.FC = () => {
           
           // Primero obtenemos todos los productos para encontrar el ID por el slug
           const products = await apiService.getProducts();
-          const foundProduct = products.find((p) => slugify(p.brand + " " + p.model) === productName);
+          const foundProduct = products.find((product) => slugify(product.brand + " " + product.model) === productName);
           
           if (!foundProduct) {
             setError("Producto no encontrado");
@@ -101,9 +101,9 @@ const ProductDetail: React.FC = () => {
       setAddingToCart(true);
       
       // Encontrar los nombres del color y almacenamiento seleccionados
-      const selectedColor = product.options?.colors?.find(c => c.code.toString() === selectedColorCode);
-      const selectedStorage = product.options?.storages?.find(s => s.code.toString() === selectedStorageCode);
-      
+      const selectedColor = product.options?.colors?.find(color => color.code.toString() === selectedColorCode);
+      const selectedStorage = product.options?.storages?.find(storage => storage.code.toString() === selectedStorageCode);
+
       const cartItem = {
         id: product.id,
         colorCode: parseInt(selectedColorCode),
@@ -111,9 +111,7 @@ const ProductDetail: React.FC = () => {
         colorName: selectedColor?.name,
         storageName: selectedStorage?.name
       };
-      
-      console.log('CartItem que se envía:', cartItem);
-      
+            
       await addToCart(cartItem);
     } catch (err) {
       console.error("Error al añadir al carrito:", err);

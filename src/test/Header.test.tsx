@@ -37,7 +37,8 @@ describe('Header', () => {
         <Header />
       </BrowserRouter>
     );
-    expect(screen.getByText(/carrito: 5/i)).toBeInTheDocument();
+    // El contador se muestra como un badge con solo el número
+    expect(screen.getByText('5')).toBeInTheDocument();
   });
 
   it('muestra breadcrumb dinámico para slug', () => {
